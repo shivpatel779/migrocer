@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: spree_development_migrocer_demo
+  username: postgres
+  password: 12345678
+  pool: 5
+  host: localhost
