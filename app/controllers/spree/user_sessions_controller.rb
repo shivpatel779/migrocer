@@ -7,6 +7,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Store
 
   def create
+    @spree_user = Spree::User.new
     authenticate_spree_user!
 
     if spree_user_signed_in?
@@ -25,7 +26,7 @@ class Spree::UserSessionsController < Devise::SessionsController
       respond_to do |format|
         format.html {
           flash.now[:error] = t('devise.failure.invalid')
-          render :user_auth_fail
+          render :new, :@spree_user => @spree_user 
         }
         format.js {
           render :json => { error: t('devise.failure.invalid') }, status: :unprocessable_entity
